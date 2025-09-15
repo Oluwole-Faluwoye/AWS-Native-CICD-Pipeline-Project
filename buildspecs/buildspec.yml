@@ -9,6 +9,7 @@ phases:
       - cp ./settings.xml /root/.m2/settings.xml
       - cp ./pmd/pmd-ruleset.xml /root/.m2/pmd-ruleset.xml
 
+  # Optional pre_build commands (kept commented)
   # pre_build:
   #   commands:
   #     - apt-get update
@@ -20,13 +21,7 @@ phases:
   pre_build:
     commands:
       - echo "Fetching fresh CodeArtifact token"
-      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-          --domain java-webapp \
-          --domain-owner 761018849945 \
-          --query authorizationToken \
-          --output text)
-      - aws codeartifact login --tool maven --repository maven-repo \
-          --domain java-webapp --domain-owner 761018849945
+      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain java-webapp --domain-owner 761018849945 --query authorizationToken --output text)
 
   build:
     commands:
