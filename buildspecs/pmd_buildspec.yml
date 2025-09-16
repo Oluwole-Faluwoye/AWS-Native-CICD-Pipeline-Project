@@ -19,10 +19,10 @@ phases:
   #     - ln -s apache-maven-3.9.4 maven
 
   pre_build:
-  commands:
-    - echo "Fetching fresh CodeArtifact token"
-    - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain java-webapp --domain-owner 761018849945 --query authorizationToken --output text)
-    - aws codeartifact login --tool mvn --repository maven-central-store --domain java-webapp --domain-owner 761018849945
+    commands:
+      - echo "Fetching fresh CodeArtifact token"
+      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain java-webapp --domain-owner 761018849945 --query authorizationToken --output text)
+      - aws codeartifact login --tool mvn --repository maven-central-store --domain java-webapp --domain-owner 761018849945
 
   build:
     commands:
