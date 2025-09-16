@@ -5,17 +5,20 @@ phases:
     runtime-versions:
       java: corretto17
     commands:
-      - echo "Setting up Maven configuration for PMD"
+      - echo "Copying Maven settings and PMD ruleset"
+      - mkdir -p /root/.m2
+      - cp ./settings.xml /root/.m2/settings.xml
       - cp ./pmd/pmd-ruleset.xml /root/.m2/pmd-ruleset.xml
 
   pre_build:
     commands:
-      - echo "Logging into CodeArtifact"
-      - aws codeartifact login --tool maven \
+      - echo "Fetching CodeArtifact token"
+      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
           --domain java-webapp-maven-repo \
           --domain-owner 761018849945 \
-          --repository maven-central-store
-      - echo "CodeArtifact login complete"
+          --query authorizationToken \
+          --output text)
+      - echo "Token fetched successfully"
 
   build:
     commands:
