@@ -1,11 +1,15 @@
 version: 0.2
 
+env:
+  parameter-store:
+    CODEARTIFACT_AUTH_TOKEN: CODEARTIFACT_AUTH_TOKEN
+
 phases:
   install:
     runtime-versions:
       java: corretto17
     commands:
-      - echo "Copying Maven settings and PMD ruleset"
+      - echo "Setting up Maven settings and PMD rules"
       - mkdir -p /root/.m2
       - cp ./settings.xml /root/.m2/settings.xml
       - cp ./pmd/pmd-ruleset.xml /root/.m2/pmd-ruleset.xml
