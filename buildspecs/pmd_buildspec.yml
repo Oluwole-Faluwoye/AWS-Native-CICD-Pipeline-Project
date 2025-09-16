@@ -9,13 +9,16 @@ phases:
       - cp ./settings.xml /root/.m2/settings.xml
       - cp ./pmd/pmd-ruleset.xml /root/.m2/pmd-ruleset.xml
 
-  pre_build:
-    commands:
-      - echo "Fetching fresh CodeArtifact token"
-      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-          --domain java-webapp-maven-repo \
-          --domain-owner 761018849945 \
-          --query authorizationToken --output text)
+pre_build:
+  commands:
+    - echo "Fetching fresh CodeArtifact token"
+    - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+        --domain java-webapp-maven-repo \
+        --domain-owner 761018849945 \
+        --query authorizationToken \
+        --output text)
+    - echo "Token fetched successfully"
+
 
   build:
     commands:
