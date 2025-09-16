@@ -1,23 +1,22 @@
 version: 0.2
 
+env:
+  variables:
+    MAVEN_OPTS: "-Xmx1024m"
+
 phases:
   install:
     runtime-versions:
       java: corretto17
     commands:
-      - echo "Setting up Maven settings and PMD rules"
+      - echo "Copying Maven settings.xml"
       - mkdir -p /root/.m2
       - cp ./settings.xml /root/.m2/settings.xml
-      - cp ./pmd/pmd-ruleset.xml /root/.m2/pmd-ruleset.xml
 
   pre_build:
     commands:
       - echo "Fetching CodeArtifact token"
-      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-          --domain java-webapp-maven-repo \
-          --domain-owner 761018849945 \
-          --query authorizationToken \
-          --output text)
+      - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain java-webapp-maven-repo --domain-owner 761018849945 --query authorizationToken --output text)
       - echo "Token fetched successfully"
 
   build:
