@@ -71,7 +71,7 @@
           </executions>
           <configuration>
             <rulesets>
-                <ruleset>/root/.m2/pmd-ruleset.xml</ruleset>
+                <ruleset>pmd/pmd-ruleset.xml</ruleset>
             </rulesets>
             <sourceEncoding>UTF-8</sourceEncoding>
             <linkXRef>false</linkXRef>
