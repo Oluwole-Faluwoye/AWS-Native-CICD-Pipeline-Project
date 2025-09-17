@@ -71,7 +71,7 @@
           </executions>
           <configuration>
             <rulesets>
-                <ruleset>${basedir}/pmd/pmd-ruleset.xml</ruleset>
+                <ruleset>${project.parent.basedir}/pmd/pmd-ruleset.xml</ruleset>
             </rulesets>
             <sourceEncoding>UTF-8</sourceEncoding>
             <linkXRef>false</linkXRef>
